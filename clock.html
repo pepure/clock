@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kindle Clock</title>
+<style>
+  @font-face {
+    font-family: 'TimeFont';
+    src: url('time.ttf') format('truetype');
+  }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: white;
+    color: black;
+    font-family: Arial, sans-serif;
+    /* Limit the width to the height of the viewport to maintain aspect ratio on rotation */
+    width: 100vh;
+    overflow: hidden;
+  }
+  #clock {
+    text-align: center;
+    /* Rotate the content by 90 degrees */
+    transform: rotate(90deg);
+    transform-origin: center center;
+  }
+  #time {
+    font-size: 15em;
+    margin: 0;
+    font-family: 'TimeFont', Arial, sans-serif;
+  }
+  #date {
+    font-size: 3em;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div id="clock">
+  <div id="time"></div>
+  <div id="date"></div>
+</div>
+
+<script>
+function updateClock() {
+  var now = new Date();
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  document.getElementById('time').textContent = hours + ':' + minutes;
+
+  var year = now.getFullYear();
+  var month = now.getMonth() + 1;
+  var day = now.getDate();
+
+  month = month < 10 ? '0' + month : month;
+  day = day < 10 ? '0' + day : day;
+  document.getElementById('date').textContent = year + '.' + month + '.' + day;
+}
+
+updateClock();
+setInterval(updateClock, 60000);
+</script>
+</body>
+</html>
